@@ -47,17 +47,27 @@ class ExtratorURL:
     def __str__(self):
         return self.url + "\n" + "Parâmetros: " + self.get_url_parametros() + "\n" + "URL Base: " + self.get_url_base()
 
+    def __eq__(self, other):
+        return self.url == other.url
 
 url = "bytebank.com/cambio?quantidade=100&moedaDestino=dolar&moedaOrigem=real"
 extrator_url = ExtratorURL(url)
-extrator_url_2 = ExtratorURL(url)
+#extrator_url_2 = ExtratorURL(url)
 
-#print(f'O tamanho da URL é : {len(extrator_url)}')
-#print(extrator_url)
+print(f'O tamanho da URL é : {len(extrator_url)}')
+print(extrator_url)
 
-print(extrator_url == extrator_url_2)
+#print(extrator_url == extrator_url_2) # extrator_url.__eq__(extrator_url_2)
 
-#valor_quantidade = extrator_url.get_valor_parametro("quantidade")
-#print(valor_quantidade)
+valor_dolar = 5.50
+
+moeda_origem = extrator_url.get_valor_parametro("moedaOrigem")
+moeda_destino = extrator_url.get_valor_parametro("moedaDestino")
+valor_quantidade = int(extrator_url.get_valor_parametro("quantidade"))
+
+valor_convertido = valor_quantidade/valor_dolar
+
+
+print(f'A moeda de origem é o {moeda_origem}, a de destino é o {moeda_destino}. O valor final é {valor_convertido}')
 
 
